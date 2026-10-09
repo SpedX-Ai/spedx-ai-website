@@ -328,6 +328,48 @@ body:after{width:32vw;height:32vw;min-width:230px;min-height:230px;right:-12vw;t
  .section h2:after{transform:scaleX(1);transition:none}
 }
 
+
+/* INVESTOR Q&A SPOTLIGHT — cinematic, accessible FAQ motion */
+#faq .heading{position:relative}
+#faq .heading:after{content:"20 QUESTIONS · CLEAR ANSWERS";display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 12px;border:1px solid rgba(68,190,222,.32);border-radius:999px;background:linear-gradient(110deg,rgba(255,255,255,.85),rgba(222,248,250,.7));color:#267f9b;font-size:10px;font-weight:800;letter-spacing:.13em;box-shadow:0 5px 22px rgba(45,161,195,.08);animation:faqBadgeFloat 4s ease-in-out infinite}
+#faqs{max-width:900px;margin:28px auto 0;counter-reset:investor-question;perspective:1000px}
+#faqs .faq-item{position:relative;overflow:hidden;margin:10px 0;border:1px solid rgba(130,179,195,.28);border-radius:17px;background:linear-gradient(120deg,rgba(255,255,255,.86),rgba(244,252,253,.74));box-shadow:0 4px 18px rgba(28,106,139,.035);opacity:0;transform:translateY(22px) scale(.985);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease,background .3s ease}
+#faqs .faq-item.faq-in{opacity:1;transform:translateY(0) scale(1);transition-delay:var(--faq-delay,0ms)}
+#faqs .faq-item:before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 6px 6px 0;background:linear-gradient(180deg,#1e9fd0,#6be0d0);transform:scaleY(0);transform-origin:center;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+#faqs .faq-item:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(110deg,transparent 22%,rgba(255,255,255,.75) 48%,transparent 72%);transform:translateX(-140%);opacity:0}
+#faqs .faq-item:hover{transform:translateY(-2px);border-color:rgba(49,174,211,.52);box-shadow:0 12px 34px rgba(38,139,172,.1)}
+#faqs .faq-item:hover:after{opacity:1;animation:investorSweep .85s ease-out}
+#faqs .faq-item.open{border-color:rgba(40,169,207,.55);background:linear-gradient(120deg,rgba(255,255,255,.98),rgba(235,250,251,.93));box-shadow:0 14px 38px rgba(39,143,176,.105),inset 0 0 0 1px rgba(255,255,255,.9)}
+#faqs .faq-item.open:before{transform:scaleY(1)}
+#faqs .faq-q{position:relative;z-index:1;align-items:center;padding:19px 20px;gap:14px;font-size:14px;line-height:1.55;transition:color .25s ease}
+#faqs .faq-q:before{counter-increment:investor-question;content:counter(investor-question,decimal-leading-zero);display:inline-grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#e5f7fb,#f5fffd);border:1px solid rgba(67,186,211,.22);color:#348aa5;font-size:10px;font-weight:800;letter-spacing:.04em;transition:transform .35s ease,background .35s ease,color .35s ease,box-shadow .35s ease}
+#faqs .faq-q:hover{color:#167fa8}
+#faqs .faq-q span{flex:0 0 30px;width:30px;height:30px;border:1px solid rgba(80,179,202,.28);background:rgba(230,249,251,.75);color:#2786a1;font-size:20px;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s ease,color .3s ease,box-shadow .3s ease}
+#faqs .faq-item.open .faq-q:before{transform:rotate(-5deg) scale(1.06);background:linear-gradient(145deg,#b9f0e4,#cceeff);color:#126e91;box-shadow:0 5px 16px rgba(57,173,196,.18)}
+#faqs .faq-item.open .faq-q span{transform:rotate(135deg);background:linear-gradient(135deg,#167fbd,#62d7df);color:#fff;box-shadow:0 5px 15px rgba(39,150,194,.22)}
+#faqs .faq-a{position:relative;z-index:1;padding:0 62px 22px 70px;font-size:13px;line-height:1.9;animation:investorAnswerIn .4s cubic-bezier(.2,.8,.2,1) both}
+#faqs .faq-item.open .faq-a:before{content:"";display:block;width:100%;height:1px;margin:0 0 14px;background:linear-gradient(90deg,rgba(70,184,213,.35),rgba(70,184,213,0))}
+#faqs .faq-item.open .faq-a{display:block}
+@keyframes faqBadgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes investorSweep{0%{transform:translateX(-140%)}100%{transform:translateX(140%)}}
+@keyframes investorAnswerIn{from{opacity:0;transform:translateY(-7px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:560px){
+ #faqs{margin-top:20px}
+ #faqs .faq-item{border-radius:14px;margin:8px 0}
+ #faqs .faq-q{padding:15px 12px;gap:10px;font-size:12px}
+ #faqs .faq-q:before{flex-basis:30px;width:30px;height:30px;border-radius:10px}
+ #faqs .faq-q span{flex-basis:27px;width:27px;height:27px;min-width:27px;min-height:27px}
+ #faqs .faq-a{padding:0 16px 18px 52px;font-size:12px}
+ #faq .heading:after{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #faq .heading:after{animation:none}
+ #faqs .faq-item{opacity:1;transform:none;transition:none}
+ #faqs .faq-item:after{display:none}
+ #faqs .faq-q:before,#faqs .faq-q span{transition:none}
+ #faqs .faq-a{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -371,6 +413,24 @@ const qa=[
 ["What is the long-term vision?","To become a conversational execution layer between human intent and the digital services people use every day."]
 ];
 document.getElementById('faqs').innerHTML=qa.map((x,i)=>'<div class="faq-item"><button class="faq-q" aria-expanded="false">'+String(i+1).padStart(2,'0')+'. '+x[0]+' <span>+</span></button><div class="faq-a">'+x[1]+'</div></div>').join('');
+
+/* Investor Q&A: staggered entrance and one-at-a-time keyboard-friendly open state */
+(function(){
+ const list=document.getElementById('faqs');
+ if(!list)return;
+ const items=[...list.querySelectorAll('.faq-item')];
+ items.forEach((item,i)=>item.style.setProperty('--faq-delay',(Math.min(i,7)*65)+'ms'));
+ if('IntersectionObserver' in window){
+   const faqObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+     if(entry.isIntersecting){
+       entry.target.classList.add('faq-in');
+       faqObserver.unobserve(entry.target);
+     }
+   }),{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+   items.forEach(item=>faqObserver.observe(item));
+ }else items.forEach(item=>item.classList.add('faq-in'));
+})();
+
 document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>{const item=b.parentElement;item.classList.toggle('open');b.setAttribute('aria-expanded',item.classList.contains('open'));b.querySelector('span').textContent=item.classList.contains('open')?'−':'+';}));
 const topBtn=document.getElementById('topBtn');const backTopTransition=document.getElementById('backTopTransition');window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>500));topBtn.addEventListener('click',()=>{if(backTopTransition){backTopTransition.classList.remove('play');void backTopTransition.offsetWidth;backTopTransition.classList.add('play');}window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.section,.card,.category,.founder,.snap').forEach(e=>{e.classList.add('reveal');io.observe(e)});
