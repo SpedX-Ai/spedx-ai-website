@@ -395,6 +395,119 @@ body:after{width:32vw;height:32vw;min-width:230px;min-height:230px;right:-12vw;t
 @media(max-width:560px){.business-model-grid,.resource-grid{grid-template-columns:1fr}.market-calculator,.founder-story,.progress-log{padding:19px}.founder-story{grid-template-columns:1fr}.story-orb{margin-bottom:7px}.log-row{grid-template-columns:14px 1fr}.log-row time{grid-column:2}.comparison-table th,.comparison-table td{padding:12px}}
 @media print{#strategy-explorer,#company-resources{display:none!important}}
 
+
+
+/* Global motion system + responsive polish */
+:root{scroll-behavior:smooth}
+@keyframes sxFadeUp{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes sxSoftIn{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:blur(0)}}
+@keyframes sxProgressGlow{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes sxTapPulse{0%{box-shadow:0 0 0 0 #74cbbd55}100%{box-shadow:0 0 0 10px #74cbbd00}}
+.motion-ready [data-reveal]{opacity:0;transform:translate3d(0,22px,0);transition:opacity .7s cubic-bezier(.2,.65,.25,1),transform .7s cubic-bezier(.2,.65,.25,1);transition-delay:var(--reveal-delay,0ms);will-change:opacity,transform}
+.motion-ready [data-reveal].is-visible{opacity:1;transform:translate3d(0,0,0);will-change:auto}
+.motion-ready .hero-copy{animation:sxFadeUp .85s both}
+.motion-ready .visual{animation:sxSoftIn 1s .12s both}
+.section,.card,.category,.brief-card,.workflow-explorer,.market-calculator,.founder-story,.progress-log,.fundbox,.before-after,.comparison-table-wrap{transition:box-shadow .3s ease,border-color .3s ease,background-color .3s ease}
+.card:hover,.category:hover,.brief-card:hover,.archbox:hover,.snap:hover,.founder:hover,.resource-grid .brief-card:hover{transform:translateY(-4px);box-shadow:0 20px 45px #315e7017;border-color:#ccebe8}
+.card,.category,.archbox,.snap,.founder,.resource-grid .brief-card{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+a,button,input,select,textarea{ -webkit-tap-highlight-color:transparent}
+button,.btn,.cta{touch-action:manipulation}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #62bfc8;outline-offset:3px}
+#sxScrollProgress{position:fixed;z-index:100;top:0;left:0;width:100%;height:3px;pointer-events:none;background:#dce9ed}
+#sxScrollProgress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#62b99a,#69b7d2,#a38bda);box-shadow:0 0 12px #79cbbd;transition:width .08s linear}
+#mobileNavToggle{display:none;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#ffffffd9;color:var(--ink);border-radius:12px;padding:10px 12px;min-height:42px;font:700 12px Inter;cursor:pointer}
+#mobileNavToggle .hamburger{display:grid;gap:4px}
+#mobileNavToggle .hamburger i{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s,opacity .2s}
+#mobileNavToggle[aria-expanded="true"] .hamburger i:first-child{transform:translateY(3px) rotate(45deg)}
+#mobileNavToggle[aria-expanded="true"] .hamburger i:last-child{transform:translateY(-3px) rotate(-45deg)}
+.mobile-investor-link{display:none}
+@media(max-width:760px){
+ .wrap{width:min(100% - 32px,640px)}
+ .header{height:68px}
+ .header .wrap{position:relative;gap:9px}
+ .brand{gap:8px;font-size:14px}
+ .mark{width:34px;height:34px;border-radius:12px;font-size:20px}
+ #mobileNavToggle{display:inline-flex;margin-left:auto;flex-shrink:0}
+ .header .cta{display:none}
+ .header .nav{display:none;position:absolute;top:calc(100% + 9px);left:0;right:0;z-index:30;padding:12px;gap:4px;max-height:min(72vh,560px);overflow-y:auto;border:1px solid #ffffff;border-radius:18px;background:#f8fcfdf5;backdrop-filter:blur(22px);box-shadow:0 22px 55px #20394b26}
+ .header .nav.open{display:grid;grid-template-columns:1fr 1fr;animation:sxFadeUp .2s both}
+ .header .nav a{padding:12px 10px;min-height:42px;display:flex;align-items:center;border-radius:10px;font-size:12px}
+ .header .nav a:hover,.header .nav a:focus-visible{background:#e8f7f5}
+ .header .nav .mobile-investor-link{display:flex;grid-column:1/-1;background:#17212b;color:#fff;justify-content:center}
+ .hero{grid-template-columns:1fr;gap:22px;padding:48px 0 36px;min-height:auto}
+ .hero h1{font-size:clamp(39px,10vw,58px);margin:17px 0}
+ .hero p{font-size:14px;line-height:1.8}
+ .visual{height:330px;min-width:0;overflow:hidden}
+ .halo{width:260px;height:260px}
+ .float{padding:11px 12px;font-size:10px}
+ .f1{top:26px;left:2px}.f2{right:1px;top:118px}.f3{left:2px;bottom:24px}
+ .panel{padding:22px;transform:none}
+ .section{padding:54px 0}
+ .heading{grid-template-columns:1fr;gap:14px;margin-bottom:23px}
+ .section h2{font-size:clamp(30px,8vw,43px)}
+ .heading p,.section-intro{font-size:13px}
+ .cards,.node,.fundbox{grid-template-columns:1fr;gap:17px}
+ .card{padding:22px}
+ .node{gap:22px}
+ .node-art{min-height:280px}
+ .architecture{grid-template-columns:1fr 1fr;padding:15px;gap:9px}
+ .archbox{min-height:86px;padding:12px;font-size:11px}
+ .grid3{grid-template-columns:1fr 1fr;gap:10px}
+ .category{padding:17px;border-radius:18px}
+ .category h3{font-size:14px}
+ .category p{font-size:11px}
+ .fundbox{padding:23px}
+ .timeline{padding-left:24px}
+ .timeline article:before{left:-30px}
+ .workflow-explorer,.before-after,.market-calculator,.founder-story,.progress-log{padding:19px}
+ .workflow-nodes{gap:7px}
+ .workflow-node{min-height:44px;justify-content:center;padding:9px;font-size:10px}
+ .workflow-explain{padding:14px}
+ .market-calculator{gap:18px}
+ .market-output strong{font-size:25px}
+ .comparison-table-wrap{max-width:calc(100vw - 32px)}
+ .comparison-table{font-size:10px}
+ .comparison-table th,.comparison-table td{padding:11px;min-width:120px}
+ .resource-grid,.business-model-grid{grid-template-columns:1fr}
+ .founder-story{grid-template-columns:1fr;gap:13px}
+ .story-orb{width:64px;height:64px;border-radius:20px;font-size:32px}
+ .log-row{grid-template-columns:12px 1fr;gap:11px}
+ .log-row time{grid-column:2}
+ .faq-tools{padding:15px}
+ .faq-search-label{font-size:12px}
+ .faq-filter-row{gap:6px}
+ .faq-filter{min-height:38px;padding:9px 11px}
+ input,select,textarea{font-size:16px!important}
+ .btn,.cta{min-height:44px;padding:12px 15px}
+ .actions{gap:9px}
+ .trust{gap:8px;line-height:1.7}
+ .marquee{padding:14px 0}
+ .marquee .wrap{justify-content:center;gap:12px 18px}
+ .footer,.footer .wrap{gap:14px}
+}
+@media(max-width:420px){
+ .wrap{width:calc(100% - 26px)}
+ .header .wrap{width:calc(100% - 24px)}
+ .header .nav.open{grid-template-columns:1fr 1fr}
+ .hero{padding-top:36px}
+ .hero h1{font-size:38px}
+ .visual{height:290px}
+ .panel{width:76%;padding:19px}
+ .grid3{grid-template-columns:1fr}
+ .category{display:grid;grid-template-columns:32px 1fr;column-gap:12px;align-items:start}
+ .category .icon{grid-row:span 2}
+ .category h3{margin:3px 0 5px}
+ .category p{grid-column:2;margin:0}
+ .workflow-node{min-width:0;flex:1 1 28%;font-size:9px}
+ .before-after{gap:8px}
+ .actions .btn,.actions .cta{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+ .motion-ready [data-reveal]{opacity:1;transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -665,6 +778,41 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.quer
  [users,spend,share].forEach(el=>el&&el.addEventListener('input',updateMarket));updateMarket();
  const media=document.getElementById('downloadMediaKit');if(media)media.addEventListener('click',()=>{const txt='SPEDX AI — MEDIA SUMMARY\n\nSPEDX AI is an early-stage concept for an AI-powered conversational execution platform intended to help users coordinate tasks across digital services.\n\nPositioning: From intent to authorized action.\nStage: Idea/prototype, pre-revenue.\nTraction: No paying customers or signed business partners are claimed.\nFunding: ₹32 crore target raise (not committed funding).\n\nAll workflows and integrations described on the website are intended concepts unless explicitly labelled live.\nContact: spedxai@gmail.com';const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='SpedX-AI-Media-Summary.txt';a.click();URL.revokeObjectURL(url)});
  const fact=document.querySelector('.resource-fact');if(fact)fact.addEventListener('click',()=>document.getElementById('downloadFactSheet')?.click());
+})();
+
+
+/* Site-wide reveal motion, mobile navigation and scroll progress */
+(function(){
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const header=document.querySelector('.header');
+ const nav=header&&header.querySelector('.nav');
+ const headerWrap=header&&header.querySelector('.wrap');
+ if(header&&nav&&headerWrap&&!document.getElementById('mobileNavToggle')){
+  const toggle=document.createElement('button');
+  toggle.id='mobileNavToggle';toggle.type='button';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','siteNavigation');toggle.setAttribute('aria-label','Open navigation menu');
+  toggle.innerHTML='<span class="hamburger" aria-hidden="true"><i></i><i></i></span><span>Menu</span>';
+  nav.id='siteNavigation';
+  const investor=document.createElement('a');investor.href='#investor-brief';investor.className='mobile-investor-link';investor.textContent='Investor Brief ↗';nav.appendChild(investor);
+  headerWrap.insertBefore(toggle,nav);
+  const closeMenu=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation menu');toggle.querySelector('span:last-child').textContent='Menu'};
+  toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);toggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');toggle.querySelector('span:last-child').textContent=open?'Close':'Menu'});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+  document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!header.contains(e.target))closeMenu()});
+  window.addEventListener('resize',()=>{if(window.innerWidth>760)closeMenu()},{passive:true});
+ }
+ if(!document.getElementById('sxScrollProgress')){const p=document.createElement('div');p.id='sxScrollProgress';p.setAttribute('aria-hidden','true');p.innerHTML='<span></span>';document.body.appendChild(p)}
+ const progress=document.querySelector('#sxScrollProgress span');
+ let scheduled=false;
+ const updateProgress=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?Math.min(100,window.scrollY/max*100):0)+'%';scheduled=false};
+ window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;window.requestAnimationFrame(updateProgress)}},{passive:true});window.addEventListener('resize',updateProgress,{passive:true});updateProgress();
+ const selectors='.hero-copy,.hero .visual,.marquee,.section .heading,.section-intro,.card,.category,.step,.archbox,.timeline article,.fundbox,.team,.founder,.snapshot,.snap,.faq-item,.brief-card,.plan-step,.workflow-explorer,.before-after,.market-calculator,.founder-story,.progress-log,.resource-grid > *, .business-model-grid > *, .node-art,.node .steps,.comparison-table-wrap,.trust-card,.allocation-wrap,.roadmap-box';
+ const targets=[...document.querySelectorAll(selectors)].filter((el,i,arr)=>!arr.some((other,j)=>j<i&&other.contains(el)));
+ targets.forEach((el,i)=>{el.setAttribute('data-reveal','');if(!el.style.getPropertyValue('--reveal-delay'))el.style.setProperty('--reveal-delay',Math.min((i%4)*75,225)+'ms')});
+ if(reduced||!('IntersectionObserver' in window)){targets.forEach(el=>el.classList.add('is-visible'));return}
+ document.documentElement.classList.add('motion-ready');
+ const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target)}}),{threshold:.08,rootMargin:'0px 0px -35px 0px'});
+ targets.forEach(el=>io.observe(el));
 })();
 
 </script></body></html>
